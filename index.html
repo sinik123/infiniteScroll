@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .block {
+            background-color: #f0f0f0;
+            margin-top: 10px;
+            height: 500px;
+            width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+    </style>
+    <script>
+        function divClick() {
+            var div = document.getElementById("block").innerHTML;
+            console.log(window.scrollY);
+        }
+        // div.addEventListener("click", function() {
+        //     console.log("dd");
+        // });
+        function scrollChanged () {
+            console.log("scroll: " + window.scrollY);
+        }
+    </script>
+</head>
+<body onscroll="scrollChanged()">
+    <h3>infiniteScroll</h3>
+
+    <div id="block" class="block" value="asdf" onclick="divClick()">
+        div
+    </div>
+
+    <div id="block" class="block">
+        div
+    </div>
+
+    <div id="block" class="block">
+        div
+    </div>
+
+    <div id="block" class="block">
+        div
+    </div>
+
+    <div id="block" class="block">
+        div
+    </div>
+</body>
+</html>
