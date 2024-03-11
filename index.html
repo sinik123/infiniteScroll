@@ -17,20 +17,23 @@
     <script>
         function divClick() {
             var div = document.getElementById("block").innerHTML;
-            console.log(window.scrollY);
+            console.log(Window.scrollY);
         }
         // div.addEventListener("click", function() {
         //     console.log("dd");
         // });
-        function scrollChanged () {
+        function scrollChanged (evt) {
             console.log("scroll: " + window.scrollY);
+            console.log(evt.pageX);
+            var size = document.getElementsByTagName("html")[0].outerHTML.length;
+            console.log("pageY size: " + size);
         }
     </script>
 </head>
 <body onscroll="scrollChanged()">
     <h3>infiniteScroll</h3>
 
-    <div id="block" class="block" value="asdf" onclick="divClick()">
+    <div id="block" class="block" value="asdf" onclick="divClick(evt)">
         div
     </div>
 
