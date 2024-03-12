@@ -9,7 +9,7 @@
             background-color: #f0f0f0;
             margin-top: 10px;
             height: 500px;
-            width: 1000px;
+            width: 300px;
             margin-left: auto;
             margin-right: auto;
         }
@@ -24,6 +24,19 @@
         // });
         function scrollChanged () {
             console.log("scroll: " + window.scrollY);
+            var body = document.body;
+            var html = document.documentElement;
+
+            console.log("body height: " + body.scrollHeight);
+            console.log("html height: " + html.scrollHeight);
+            console.log("window height: " + window.innerHeight);
+            console.log("scroll bottom: " + (window.scrollY + window.innerHeight));
+
+            if ((window.scrollY + window.innerHeight) > html.scrollHeight - 500) {
+                var node = document.createElement("div");
+                node.classList.add("block");
+                body.append(node);
+            }                
         }
     </script>
 </head>
