@@ -7,7 +7,8 @@
     <style>
         .block {
             background-color: #f0f0f0;
-            margin-top: 10px;
+            margin-top: 25px;
+            margin-bottom: 25px;
             height: 500px;
             width: 300px;
             margin-left: auto;
@@ -15,30 +16,59 @@
         }
     </style>
     <script>
-        
+        var order = 1;
+
+        document.addEventListener("DOMContentLoaded", function() {
+            document.body.onscroll = checkScroll;
+
+            var divs = document.querySelectorAll("div");
+            divs.forEach(function(div) {
+                div.textContent = order++;
+            });
+        })
+
+        function checkScroll () {
+            const body = document.body;
+            const html = document.documentElement;
+
+            console.log("body.scrollHeight: " + body.scrollHeight); // body 길이
+            console.log("html.scrollHeight: " + html.scrollHeight); // html 길이
+            console.log("window.innerHeight: " + window.innerHeight); // 현재 보여지는 화면의 길이
+            console.log("window.scrollY: " + window.scrollY); // 현재 보여지는 화면 맨 위 부분의 위치
+            console.log("window.scrollY + window.innerHeight: " + (window.scrollY + window.innerHeight)); // 현재 보여지는 화면 맨 아래 부분의 위치
+            console.log("-------------------------------------------------");
+
+            const gap = 500;
+            const count = 6;
+            
+            // 'html의 길이'와 현재 '보여지는 화면 맨 아래 부분의 위치'의 차이가 gap 보다 작아지면
+            if (html.scrollHeight - (window.scrollY + window.innerHeight) < gap) {
+                // div 추가 생성 후 append
+                for (var i = 0; i < count; ++i) {
+                    var element = document.createElement("div");
+                    element.textContent = order++;
+                    element.classList.add("block");
+                    body.append(element);
+                }
+            }
+        }
     </script>
 </head>
-<body onscroll="scrollChanged()">
+<body>
     <h3>infiniteScroll</h3>
 
-    <div id="block" class="block" value="asdf" onclick="divClick(evt)">
-        div
+    <div class="block">
+    </div>
+    <div class="block">
+    </div>
+    <div class="block">
+    </div>
+    <div class="block">
+    </div>
+    <div class="block">
+    </div>
+    <div class="block">
     </div>
 
-    <div id="block" class="block">
-        div
-    </div>
-
-    <div id="block" class="block">
-        div
-    </div>
-
-    <div id="block" class="block">
-        div
-    </div>
-
-    <div id="block" class="block">
-        div
-    </div>
 </body>
 </html>
