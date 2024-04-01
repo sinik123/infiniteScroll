@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infinite Scroll with Intersection Observer API</title>
+    <style>
+        /* CSS 스타일링을 위한 예시 코드 */
+        #content {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px auto;
+            max-width: 600px;
+        }
+
+        .item {
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="content">
+        <!-- 여기에 동적으로 추가될 콘텐츠들이 나타날 것입니다. -->
+    </div>
+
+    <script>
+        // Infinite Scroll을 위한 Intersection Observer 생성
+        let observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    // Intersection이 발생하면 추가 콘텐츠를 불러옵니다.
+                    loadContent();
+                    // 추가적인 Intersection을 감지할 필요가 없으므로 관찰을 중단합니다.
+                    observer.unobserve(entry.target);
+                }
+            });
+        });
+
+        // 초기 콘텐츠 로드
+        loadContent();
+
+        function loadContent() {
+            // 여기서는 간단한 예시로 새로운 콘텐츠를 생성하여 추가합니다.
+            for (let i = 0; i < 10; i++) {
+                let newItem = document.createElement('div');
+                newItem.className = 'item';
+                var count = document.querySelectorAll('.item').length + 1;
+                newItem.textContent = 'Content ' + count;
+                document.getElementById('content').appendChild(newItem);
+                // 새로운 아이템을 Intersection Observer에 관찰대상으로 추가합니다.
+                if (count % 10 == 0) {
+                    observer.observe(newItem);
+                }
+            }
+        }
+    </script>
+
+</body>
+
+</html>
